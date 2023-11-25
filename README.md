@@ -1,2 +1,2 @@
 # three-js-tutorial
-A basic website that uses three.js to display a 3D ball with changing lightning and colors. Based on YouTube tutorial by developedbyed.
+A basic website using a vite framework that uses three.js and gsap to display a 3D ball with changing lighting and colors. Based on a YouTube tutorial by developedbyed.
