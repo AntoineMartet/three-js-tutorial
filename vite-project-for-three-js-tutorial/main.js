@@ -75,8 +75,31 @@ const loop = () => {
 }
 loop()
 
-//Timeline magic... Synchronize multiple animations together
+//gsap timeline, for a series of multiple animations
 const tl = gsap.timeline({defaults: { duration: 1}})
 tl.fromTo(mesh.scale, {x:0, y:0, z:0}, {x:1.0, y:1, z:1})
 tl.fromTo("nav", {y: "-100%"}, {y: "0%"})
 tl.fromTo(".title", {opacity:0}, {opacity:1})
+
+//Mouse color animation
+let mouseDown = false
+let rgb = []
+window.addEventListener('mousedown', () => (mouseDown = true))
+window.addEventListener('mouseup', () => (mouseDown = false))
+window.addEventListener('mousemove', (e) => {
+    if(mouseDown){
+        rgb = [
+            //e.pageX and e.pageY = mouse position
+            //255 because r, g and b colors go from 0 to 255
+            Math.round((e.pageX / sizes.width) * 255),
+            Math.round((e.pageY / sizes.height) * 255),
+            150
+        ]
+        let newColor = new THREE.Color(`rgb($(rgb.join(",")})`)
+        gsap.to(mesh.material.color, {
+            r: newColor.r,
+            g: newColor.g,
+            b: newColor.b,
+        })
+    }
+})
